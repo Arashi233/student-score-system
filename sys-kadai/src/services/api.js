@@ -44,10 +44,13 @@ api.interceptors.response.use(
   }
 )
 
-// API接口定义
 export const authAPI = {
   login: (username, password) => api.post('/login', { username, password }),
-  getMe: () => api.get('/users/me')
+  getusers: () => api.get('/users'),
+  create_user: (name, pwd, type) => api.post('/users', { name, pwd, type }),
+  getMe: () => api.get('/users/me'),
+  updateUserType: (id, type) => api.put(`/users`, {id, type}),
+  deleteUser: (id) => api.delete(`/users/${id}`)
 }
 
 export const studentAPI = {
@@ -70,7 +73,7 @@ export const scoreAPI = {
   getScores: (studentId, courseId) => api.get('/scores', { 
     params: { student_id: studentId, course_id: courseId } 
   }),
-  getAllScores: () => api.get('/scores'), // 添加获取所有成绩的方法
+  getAllScores: () => api.get('/scores'),
   createScore: (score) => api.post('/scores', score),
   updateScore: (id, score) => api.put(`/scores/${id}`, score)
 }
